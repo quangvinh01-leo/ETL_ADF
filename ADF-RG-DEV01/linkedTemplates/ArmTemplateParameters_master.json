@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-RG-DEV01"
+		},
+		"GitHub_ETL_DATA_credential": {
+			"value": ""
+		},
+		"LS_abls_buyalot_webstore_connectionString": {
+			"value": ""
+		},
+		"LS_adls_data_engineering__accountKey": {
+			"value": ""
+		},
+		"LS_asql_data_engineering_metadata_connectionString": {
+			"value": ""
+		},
+		"GitHub_ETL_DATA_properties_typeProperties_username": {
+			"value": "vinhreal1996@gmail.com"
+		},
+		"LS_adls_data_engineering__properties_typeProperties_url": {
+			"value": "https://storagedatalakedev01.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

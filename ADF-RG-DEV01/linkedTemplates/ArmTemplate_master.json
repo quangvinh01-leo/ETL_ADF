@@ -1,0 +1,84 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-RG-DEV01"
+		},
+		"GitHub_ETL_DATA_credential": {
+			"type": "secureString",
+			"metadata": "Secure string for 'credential' of 'GitHub_ETL_DATA'"
+		},
+		"LS_abls_buyalot_webstore_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_abls_buyalot_webstore'"
+		},
+		"LS_adls_data_engineering__accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_adls_data_engineering_'"
+		},
+		"LS_asql_data_engineering_metadata_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_asql_data_engineering_metadata'"
+		},
+		"GitHub_ETL_DATA_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "vinhreal1996@gmail.com"
+		},
+		"LS_adls_data_engineering__properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storagedatalakedev01.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ADF-RG-DEV01_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"GitHub_ETL_DATA_credential": {
+						"value": "[parameters('GitHub_ETL_DATA_credential')]"
+					},
+					"LS_abls_buyalot_webstore_connectionString": {
+						"value": "[parameters('LS_abls_buyalot_webstore_connectionString')]"
+					},
+					"LS_adls_data_engineering__accountKey": {
+						"value": "[parameters('LS_adls_data_engineering__accountKey')]"
+					},
+					"LS_asql_data_engineering_metadata_connectionString": {
+						"value": "[parameters('LS_asql_data_engineering_metadata_connectionString')]"
+					},
+					"GitHub_ETL_DATA_properties_typeProperties_username": {
+						"value": "[parameters('GitHub_ETL_DATA_properties_typeProperties_username')]"
+					},
+					"LS_adls_data_engineering__properties_typeProperties_url": {
+						"value": "[parameters('LS_adls_data_engineering__properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
