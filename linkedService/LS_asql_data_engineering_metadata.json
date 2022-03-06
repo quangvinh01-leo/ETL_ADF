@@ -1,0 +1,13 @@
+{
+	"name": "LS_asql_data_engineering_metadata",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "Connection to the Metadata database",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=dbmetaserver.database.windows.net;initial catalog=db_meta;user id=admin123",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDYxRkUwMjI3LURBMEYtNENDMS1COENBLUM3MDNCNThFOEQ1Nl85YTE0NGNmZS00NWJjLTRiM2YtYjRjNS0wNmQyZWU0ZWRiYjQiDQp9"
+		}
+	}
+}

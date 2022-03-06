@@ -1,0 +1,92 @@
+{
+	"name": "PL_data_ingestion_json_v2",
+	"properties": {
+		"description": "Ingest webstore Online Sales data in to Datalake",
+		"activities": [
+			{
+				"name": "Copy Webstore Online Sales data",
+				"description": "Copy webstore Online Sales data in to Datalake",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_abls_buyalot_json",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_adls_data_engineering_json",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Send Email",
+				"description": "Send Email notification",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy Webstore Online Sales data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.00:10:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-17.northcentralus.logic.azure.com:443/workflows/0f0a4b5f13574610b61408c9e4044a18/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=MBeO71InCTsYsGSReophEW_TS6vkGVsWdcaPO2MR_Y4",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "@json(concat('{\n\"emailAddress\":\"vinhleo1996@gmail.com\",\n\"subject\":\"ADF Pipeline (PL_data_ingestion_json)\",\n\"messageBody\":\"ingestion of Web store Data into the Data lake has completed successfully\"\n}'))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-03-06T09:50:26Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

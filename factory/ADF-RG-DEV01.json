@@ -1,0 +1,9 @@
+{
+	"name": "ADF-RG-DEV01",
+	"location": "southeastasia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a7b66ccd-18c3-4664-b83e-d903cc0c33fb",
+		"tenantId": "c1cce7de-36ee-4c23-9e22-1566370bc878"
+	}
+}
